@@ -162,10 +162,5 @@ $(document).ready(function()
   {
     console.log("see results");
   });
-
-  $(".fa-star").click(function()
-  {
-    console.log("give feedback");
-  });
 //----------------------------------------------------------------------------------------------------------------------//
 });

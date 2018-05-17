@@ -46,7 +46,6 @@
       <i class="fas fa-eye uiElement"></i>
 			<i class="fas fa-american-sign-language-interpreting uiElement"></i>
       <i class="fas fa-chart-pie uiElement"></i>
-			<i class="fas fa-star uiElement"></i>
 		</footer>
 
     <!-- <form style="margin:auto; text-align:center;"action="php/caption.php" method="post">
