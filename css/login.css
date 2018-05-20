@@ -37,7 +37,7 @@
   overflow: hidden;
 }
 
-label
+.loginLabel
 {
 	text-align: left;
 
@@ -62,16 +62,16 @@ select:focus
   outline: none;
 }
 
-input::-webkit-input-placeholder
+input[type="text"]::-webkit-input-placeholder
 {
     color: rgba(0,0,0,0.5);
 }
-input:-moz-placeholder
+input[type="text"]:-moz-placeholder
 {
     color: rgba(0,0,0,0.5);
 }
 
-input
+input[type="text"]
 {
     width: calc(100% - 30px);
     margin-right:15px;
@@ -91,12 +91,13 @@ input
     box-sizing: border-box;
 }
 
-input[type=submit]
+input[type="submit"]
  {
    width: auto;
    float:right;
    padding: 10px;
    margin-top:15px;
+   margin-right: 10px;
    margin-bottom: 15px;
    background-color:rgba(40, 44, 52, 0.8);
    color: white;
@@ -105,7 +106,7 @@ input[type=submit]
    cursor: pointer;
 }
 
-input[type=submit]:hover
+input[type="submit"]:hover
 {
     background-color:rgba(40, 44, 52, 0.98);
 }

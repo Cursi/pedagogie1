@@ -1,4 +1,14 @@
-<?php require_once("../php/getCarousel.php");?>
+<?php 
+    require_once("../php/getCarousel.php");
+?>
 
 <img id="selectedImage" class="skinnyBorder" src="" alt="">
-<!-- <input class="descriptionInput skinnyBorder" type="text" name="" placeholder="Your description..." required> -->
+
+<?php
+    $images = glob("../data/*.*");
+
+    for($i=0; $i<count($images); $i++)
+    {
+      echo '<input oninput="CheckDescriptionInputs();" class="descriptionInput skinnyBorder" type="text" name="' . $i . '" placeholder="Your description..." required>' . "\n";
+    }
+?>

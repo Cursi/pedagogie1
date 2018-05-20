@@ -3,11 +3,8 @@
 
   if (isset($_POST["description"]))
   {
-    // echo $_POST["description"];
-
     $result = mysqli_query($db, "SELECT COUNT(username) from data_table WHERE username='". $_SESSION["userName"] . "'");
     $userExists = $result->fetch_row()[0];
-    // var_dump($userExists);
 
     $description = mysqli_real_escape_string($db, $_POST["description"]);
 

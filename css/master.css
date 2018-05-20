@@ -44,12 +44,17 @@ body,html
 
 body
 {
-  letter-spacing: 1px;
   background-color: #ffffff;
   font-family: appleLight;
 
   overflow-x: hidden;
   background-color: rgba(40, 44, 52, 0.98);
+}
+
+#pageContainer
+{
+  word-wrap: break-word;
+  overflow-x: hidden;
 }
 
 .flexedContainer
@@ -140,6 +145,11 @@ footer
   padding-bottom: 9px;
 }
 
+.uiElement:focus 
+{
+  outline:none;
+}
+
 .outsetContainer
 {
   margin-top: 42px;
@@ -160,13 +170,16 @@ footer
 
 .aboutContainer
 {
-  padding-bottom: 70px;
+  padding-bottom: 60px;
+  color:white;
 }
 
 .aboutTitle
 {
   font-family: appleRegular;
   font-size:24px;
+  color:rgb(255, 172, 83);
+
 
   padding-left:8px;
   padding-right:8px;
@@ -217,14 +230,45 @@ footer
 {
   position: absolute;
   bottom: 42px;
-  width:100%;
-  margin: 0;
-  border-radius: 0;
+  width:100% !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
 
-  display: none;
+  display: none !important;
 }
 
 .descriptionInput.active
 {
+  display: block !important;
+}
+
+.classifyContainer
+{
+  color: white;
+
+  margin-top:18px;
+  padding-left:8px;
+  padding-right:8px;
+  padding-bottom: 54px;
+
+  display: none;
+}
+
+.classifyContainer.active
+{
   display: block;
+}
+
+#taskContainer
+{
+  font-family: appleRegular;
+  font-size:24px;
+  text-align: center;
+  color:rgb(255, 172, 83);
+
+  margin-top:18px;
+  padding-left:8px;
+  padding-right:8px;
+  padding-bottom:8px;
+  margin-bottom: 10px;
 }

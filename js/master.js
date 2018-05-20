@@ -1,5 +1,5 @@
 //----------------------------------------------------------------------------------------------------------------------//
-var regionID;
+var regionID, postSent;
 
 function GetJson()
 {
@@ -37,7 +37,7 @@ function GetJson()
 
 function CheckDescriptionInputs()
 {
-  if(AreFieldsFilled()) $("#sendButton").show(500);
+  if(AreFieldsFilled()) $("#sendButton").show(1000);
   else $("#sendButton").hide();
 }
 
@@ -105,10 +105,7 @@ $(document).ready(function()
       {
         var descriptionJSON = GetJson();
 
-        $.post("./php/insertDescriptions.php", { description: descriptionJSON }, function(data)
-        {
-							console.log(data);
-				});
+        $.post("./php/insertDescriptions.php", { description: descriptionJSON });
         break;
       }
       case 2:
@@ -121,6 +118,8 @@ $(document).ready(function()
       }
       default: break;
     }
+
+    location.reload();
   });
 //----------------------------------------------------------------------------------------------------------------------//
   $(".fa-home").click(function()
@@ -132,30 +131,100 @@ $(document).ready(function()
   $(".fa-eye").click(function()
   {
     regionID = 1;
-    $("#pageContainer").load("./pages/describe.php", function()
+    $.post("./php/checkDescription.php", function(descriptionExists)
     {
-      $(".owl-carousel").owlCarousel(
-        {
-          autoWidth: true,
-          navigation : true
-        });
-
-      $("#selectedImage").attr("src", $(".thumbnail")[0].src);
-      $($(".descriptionInput")[0]).addClass("active");
-
-      $(".thumbnail").click(function()
+      if(!parseInt(descriptionExists))
       {
-        $("#selectedImage").attr("src", this.src);
+        $("#pageContainer").load("./pages/describe.php", function()
+        {
+          $(".owl-carousel").owlCarousel(
+          {
+            autoWidth: true,
+            navigation : true
+          });
+          $(".owl-carousel").hide().show(1000);
 
-        $(".descriptionInput").not($(".descriptionInput")[this.name]).removeClass("active");
-        $($(".descriptionInput")[this.name]).addClass("active");
-      });
+          $("#selectedImage").attr("src", $(".thumbnail")[0].src);
+          $($(".descriptionInput")[0]).addClass("active");
+
+          $(".thumbnail").click(function()
+          {
+            $("#selectedImage").attr("src", this.src);
+
+            $(".descriptionInput").not($(".descriptionInput")[this.name]).removeClass("active");
+            $($(".descriptionInput")[this.name]).addClass("active");
+          });
+        });
+      }
+      else alert("You already sent your descriptions.");
     });
   });
 
   $(".fa-american-sign-language-interpreting").click(function()
   {
-    console.log("classify");
+    regionID = 2;
+    $.post("./php/checkBigBoy.php", function(bigBoyGaveAccess)
+    {
+      if(parseInt(bigBoyGaveAccess))
+      {
+        $.post("./php/checkClassify.php", function(result)
+        {
+          var classifyExists = (result ? 1 : 0 );
+
+          if(!parseInt(classifyExists))
+          {
+            $("#pageContainer").load("./pages/classify.php", function()
+            {
+              $(".owl-carousel").owlCarousel(
+              {
+                autoWidth: true,
+                navigation : true
+              });
+              $(".owl-carousel").hide().show(500);
+
+              for(let i=0; i<$(".thumbnail").length; i++)
+              {
+                $("#pageContainer").append('<div id="listContainer' + i + '" class="classifyContainer"></div>');
+              }
+
+              $(".thumbnail").click(function()
+              {
+                var imageURL = this.src;
+                var imageID = this.name;
+
+                $(".classifyContainer").not($(".classifyContainer")[this.name]).removeClass("active");
+                $($(".classifyContainer")[imageID]).addClass("active");
+
+                if ($("#listContainer" + imageID).is(":empty") && !postSent)
+                {
+                  postSent = true;
+
+                  $.post("./php/getDescriptions.php", { imageURL: imageURL }, function(json)
+                  {
+                    postSent = false;
+
+                    json = JSON.parse(json);
+                    json.sort(function() { return 0.5 - Math.random() });
+                    console.log(json);
+                    
+                    for(let i=0; i<json.length; i++)
+                    {
+                      $("#listContainer" + imageID).append(
+                        '<label class="label">' + json[i]["description"] +
+                        '<input type="radio" name="' + imageURL + '" label="' + json[i].isAI + '">' +
+                        '<span class="checkmark"></span>' +
+                        '</label>');
+                    }
+                  });
+                }
+              });
+            });
+          }
+          else alert("You already classified descriptions.");
+        });
+      }
+      else alert("You were not granted access yet.");
+    });
   });
 
   $(".fa-chart-pie").click(function()
