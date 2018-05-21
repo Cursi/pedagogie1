@@ -1,4 +1,4 @@
-<?php 
+<?php
     require_once("../php/getCarousel.php");
 ?>
 
@@ -9,6 +9,6 @@
 
     for($i=0; $i<count($images); $i++)
     {
-      echo '<input oninput="CheckDescriptionInputs();" class="descriptionInput skinnyBorder" type="text" name="' . $i . '" placeholder="Your description..." required>' . "\n";
+      echo '<input oninput="CheckFields();" class="descriptionInput skinnyBorder" type="text" name="' . $i . '" placeholder="Your description..." required>' . "\n";
     }
 ?>

@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "My Protected Area"
+AuthUserFile C:\\xampp\\htdocs\\captionTest\\php\\danger/.htpasswd
+Require valid-user

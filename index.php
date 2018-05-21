@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
 
+    <link rel="stylesheet" type="text/css" href="css/chartist.min.css">
+
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/radio.css">
     <link rel="stylesheet" href="css/master.css">
@@ -49,7 +51,9 @@
 		</footer>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
     <script src="js/owl.carousel.min.js"></script>
+    <script src="js/chartist.min.js"></script>
 
     <script type="text/javascript" src="js/master.js"></script>
   </body>
